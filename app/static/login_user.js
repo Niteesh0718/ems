@@ -9,7 +9,7 @@
 
       let data = { email: e, password: p };
 
-      fetch("http://127.0.0.1:8000/login_details/", {
+      fetch("/login_details/", {
         method: "post",
         headers: {
           "Content-Type": "application/json",

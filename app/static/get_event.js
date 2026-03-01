@@ -1,4 +1,4 @@
-fetch("http://127.0.0.1:8000/get_events/")
+fetch("/get_events/")
 .then((res)=>res.json())
 .then(events => {
     const container = document.getElementById("events-container");

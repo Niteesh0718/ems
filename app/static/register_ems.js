@@ -12,7 +12,7 @@ btn.addEventListener("click",(a)=>{
         c_password:c_p
     }
     console.log(data)
-    fetch('http://127.0.0.1:8000/register_details/',{
+    fetch('/register_details/',{
         method:'post',
         headers:{
             "content-Type":"application/json"
@@ -27,7 +27,7 @@ btn.addEventListener("click",(a)=>{
        console.log(res.msg)
 
         
-        if(res.success){
+        if(res.status){
             alert(res.msg)
             document.getElementById("name").value = ""
             document.getElementById("email").value = ""
