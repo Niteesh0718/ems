@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 import os
 from importlib.util import find_spec
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +31,7 @@ def _env_list(key, default):
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-j44(ufb34c-x#cqi1sz@3nue$!s_-qlm6(yp3j)bpfbipypf!k')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
+DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = _env_list("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost,.onrender.com")
 CSRF_TRUSTED_ORIGINS = _env_list("DJANGO_CSRF_TRUSTED_ORIGINS", "https://*.onrender.com")
@@ -138,10 +139,18 @@ if os.path.isdir(project_static_dir):
     STATICFILES_DIRS.append(project_static_dir)
 
 if find_spec("whitenoise"):
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    # Django 6+ static storage configuration
+    STORAGES = {
+        "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+        "staticfiles": {"BACKEND": "whitenoise.storage.CompressedStaticFilesStorage"},
+    }
+    # Allow serving files discovered by finders (e.g., app/static/*) on platform deploys.
+    WHITENOISE_USE_FINDERS = True
 
 
 if not DEBUG:
+    if SECRET_KEY.startswith("django-insecure-"):
+        raise ImproperlyConfigured("Set DJANGO_SECRET_KEY in production.")
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
