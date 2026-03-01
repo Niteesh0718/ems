@@ -1,0 +1,126 @@
+{% include "navbar.html" %}
+
+<style>
+  body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #7f5cff, #2b1f4a 60%);
+}
+  .profile-page {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  .profile-card {
+    border: 2px solid #000;
+    border-radius: 16px;
+    padding: 20px;
+   background: rgba(255,255,255,0.95);
+  }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .profile-name {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .profile-email {
+    font-size: 14px;
+    color: #555;
+  }
+
+  .profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .stat {
+    border: 2px solid #000;
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .stat b {
+    font-size: 18px;
+    display: block;
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .actions a, .actions button {
+    padding: 10px 16px;
+    border-radius: 20px;
+    border: 2px solid #000;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .actions .secondary {
+    background: #fff;
+    color: #000;
+  }
+</style>
+
+<div class="profile-page">
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="avatar">
+        {{ user.name|slice:":1"|upper }}
+      </div>
+      <div>
+        <div class="profile-name">{{ user.name }}</div>
+        <div class="profile-email">{{ user.email }}</div>
+      </div>
+    </div>
+
+    <div class="profile-stats">
+      <div class="stat">
+        <b>{{ total_bookings }}</b>
+        Bookings
+      </div>
+      <div class="stat">
+        <b>{{ upcoming_count }}</b>
+        Upcoming
+      </div>
+      <div class="stat">
+        <b>{{ past_count }}</b>
+        Past
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="/ems_dashboard/bookings/">My Bookings</a>
+      <a href="/ems_dashboard/" class="secondary">Dashboard</a>
+      <a href="/logout/" class="secondary">Logout</a>
+    </div>
+  </div>
+</div>

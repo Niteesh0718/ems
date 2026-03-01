@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>EMS - Book Free Tickets</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: radial-gradient(circle at top, #7f5cff, #2b1f4a 60%);
+  color: white;
+}
+
+.hero {
+  text-align: center;
+  padding: 80px 30px 40px;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 52px);
+  margin-bottom: 10px;
+}
+
+.hero p {
+  max-width: 520px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.btn.login {
+  background: white;
+  color: #4a35c8;
+}
+
+.btn.register {
+  border: 2px solid rgba(255,255,255,0.8);
+  color: white;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+footer {
+  text-align: center;
+  padding: 25px 20px;
+  background: rgba(0,0,0,0.15);
+  backdrop-filter: blur(8px);
+}
+</style>
+</head>
+
+<body>
+
+<main class="hero">
+<h1>EMS – Book Free Tickets 🎟️</h1>
+<p>
+Book your free tickets easily. Just login to continue.
+If you don’t have an account, please register first.
+</p>
+
+<div class="actions">
+<a href="{% url 'login_page' %}" class="btn login">Login</a>
+<a href="{% url 'register_page' %}" class="btn register">Register</a>
+</div>
+</main>
+
+<footer>
+<h2>About EMS</h2>
+<p>
+EMS (Event Management System) is a free ticket booking platform
+designed to make event reservations simple and accessible.
+</p>
+</footer>
+
+</body>
+</html>

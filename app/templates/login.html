@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | EMS</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+   body {
+  min-height: 100vh;
+  margin: 0;
+  background: radial-gradient(circle at top, #7f5cff, #2b1f4a 60%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+#login_div {
+  width: 360px;
+  background: rgba(255,255,255,0.95);
+  padding: 32px 26px;
+  border-radius: 18px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+    /* Main Heading */
+    .main-title {
+      text-align: center;
+      margin-bottom: 4px;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: #0ea5e9;
+    }
+
+    .sub-title {
+      text-align: center;
+      margin-bottom: 22px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+
+    /* Login heading */
+    h2 {
+      text-align: center;
+      margin: 10px 0 20px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      position: relative;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 44px;
+      height: 3px;
+      background: linear-gradient(135deg, #14b8a6, #4f46e5);
+      margin: 6px auto 0;
+      border-radius: 4px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      font-size: 13px;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    #email, #password {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      outline: none;
+      font-size: 14px;
+      transition: 0.2s ease;
+      background: #f9fafb;
+    }
+
+    #email:focus,
+    #password:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+      background: #ffffff;
+      transform: scale(1.01);
+    }
+
+    #login_btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #ffffff;
+      background: linear-gradient(135deg, #14b8a6, #4f46e5);
+      transition: 0.25s ease;
+    }
+
+    #login_btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(79, 70, 229, 0.35);
+    }
+
+    #login_btn:active {
+      transform: scale(0.98);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 400px) {
+      #login_div {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="login_div">
+    <div class="main-title">EMS</div>
+    <div class="sub-title">Event Management Service</div>
+
+    <h2>Login</h2>
+
+    <form id="login_form">
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your registered email" required>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+      </div>
+
+      <button id="login_btn" type="submit">Login</button>
+    </form>
+  </div>
+<script src="{% static 'login_user.js' %}"></script>
+</body>
+</html>

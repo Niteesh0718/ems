@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | EMS</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+    #form_con p {
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* Login link */
+#form_con a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: #4f46e5;
+  transition: 0.2s ease;
+}
+
+/* Hover effect */
+#form_con a:hover {
+  color: #14b8a6;
+  text-decoration: underline;
+  transform: scale(1.05);
+}
+
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: radial-gradient(circle at top, #7f5cff, #2b1f4a 60%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+#form_con {
+  width: 360px;
+  background: rgba(255,255,255,0.95);
+  padding: 32px 26px;
+  border-radius: 18px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+    /* Main Heading */
+.main-title {
+  text-align: center;
+  margin-bottom: 4px;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #0ea5e9; /* Sky blue */
+}
+
+.sub-title {
+  color: #64748b;
+}
+
+h2::after {
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+}
+
+
+    /* Subtitle */
+    .sub-title {
+      text-align: center;
+      margin-bottom: 22px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+
+    /* Register heading */
+    h2 {
+      text-align: center;
+      margin: 10px 0 20px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      position: relative;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 44px;
+      height: 3px;
+      background: linear-gradient(135deg, #14b8a6, #4f46e5);
+      margin: 6px auto 0;
+      border-radius: 4px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      font-size: 13px;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    #name, #email, #password, #c_password {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      outline: none;
+      font-size: 14px;
+      transition: 0.2s ease;
+      background: #f9fafb;
+    }
+
+    #name:focus,
+    #email:focus,
+    #password:focus,
+    #c_password:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+      background: #ffffff;
+      transform: scale(1.01);
+    }
+
+    #reg_btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #ffffff;
+      background: linear-gradient(135deg, #14b8a6, #4f46e5);
+      transition: 0.25s ease;
+    }
+
+    #reg_btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(79, 70, 229, 0.35);
+    }
+
+    #reg_btn:active {
+      transform: scale(0.98);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 400px) {
+      #form_con {
+        width: 100%;
+      }
+    }
+   
+
+
+  </style>
+</head>
+<body>
+
+  <div id="form_con">
+    <div class="main-title">EMS</div> 
+    <div class="sub-title">Event Management Service</div>
+
+    <h2>Register</h2>
+
+    <form>
+      <div class="field">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Create a password" required>
+      </div>
+
+      <div class="field">
+        <label for="c_password">Confirm Password</label>
+        <input type="password" id="c_password" placeholder="Re-enter password" required>
+      </div>
+    </form>
+
+    <button id="reg_btn">Create Account</button>
+    <p>Already Have An Account</p>
+    <a href="{% url 'login' %}">Login</a>
+
+
+<script src="{% static 'register_ems.js' %}"></script>
+</body>
+</html>

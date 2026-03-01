@@ -1,0 +1,375 @@
+{% include "navbar.html" %}
+
+<style>
+  body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #7f5cff, #2b1f4a 60%);
+}
+  .event-page {
+    max-width: 1100px;
+    margin: 30px auto 80px;
+    border: 2px solid #000;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.95);
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    height: 300px;
+  }
+
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2));
+  }
+
+  .hero-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+  }
+
+  .hero-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .hero-meta {
+    font-size: 14px;
+    opacity: 0.95;
+  }
+
+  /* Info cards */
+  .info-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .info-card {
+    border: 2px solid #000;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    background: #fafafa;
+  }
+
+  .info-card .label {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 4px;
+  }
+
+  .info-card .value {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  /* Sections */
+  .sections {
+    padding: 20px;
+  }
+
+  details {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  summary {
+    padding: 12px 14px;
+    cursor: pointer;
+    font-weight: 600;
+    background: #f5f5f5;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details p {
+    padding: 12px 14px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Register */
+  .register-wrap {
+    text-align: center;
+    padding: 20px 20px 28px;
+  }
+
+  .register-btn {
+    padding: 12px 44px;
+    border-radius: 24px;
+    border: 2px solid #000;
+    background: #000;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+
+  .register-btn:hover {
+    background: #fff;
+    color: #000;
+  }
+
+  .sold-out {
+    padding: 12px 44px;
+    border-radius: 24px;
+    border: 2px solid #000;
+    background: #ccc;
+    color: #333;
+    font-size: 16px;
+    cursor: not-allowed;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .info-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .hero {
+      height: 220px;
+    }
+    .hero-title {
+      font-size: 22px;
+    }
+  }
+  .modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal {
+  background: #fff;
+  padding: 20px 24px 24px;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 12px;
+  border: 2px solid #000;
+}
+
+.modal h3 {
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #000;
+  border-radius: 8px;
+  outline: none;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.book-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+}
+</style>
+
+<div class="event-page">
+
+  <!-- Hero Banner -->
+  <div class="hero">
+    <img src="{{ event.img_url|default:'https://via.placeholder.com/1200x400' }}" alt="Event Image">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-title">{{ event.event_name }}</div>
+      <div class="hero-meta">
+        {{ event.date }} • {{ event.time }} • {{ event.venue }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Cards -->
+  <div class="info-cards">
+    <div class="info-card">
+      <div class="label">Date</div>
+      <div class="value">{{ event.date }}</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Time</div>
+      <div class="value">{{ event.time }}</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Venue</div>
+      <div class="value">{{ event.venue }}</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Availability</div>
+      <div class="value">
+        {{ event.vacancy }} seats left • ⭐ {{ event.ratings }}
+      </div>
+    </div>
+  </div>
+
+  <!-- About + Instructions -->
+  <div class="sections">
+    <details open>
+      <summary>About Event</summary>
+      <p>{{ event.about_event }}</p>
+    </details>
+
+    <details>
+      <summary>Instructions</summary>
+      <p>{{ event.instructions|default:"No special instructions." }}</p>
+    </details>
+  </div>
+
+  <!-- Register Button -->
+  <div class="register-wrap">
+    {% if event.vacancy > 0 %}
+      <button id="register-btn" class="register-btn">Register</button>
+      <div id="booking-modal" class="modal-overlay" style="display:none;">
+  <div class="modal">
+    <h3>Book Your Seat</h3>
+
+    <form id="booking-form">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" id="book-name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="book-email" required>
+      </div>
+
+      <div class="modal-actions">
+        <button type="submit" id="book-btn" class="book-btn">Book</button>
+        <button type="button" id="close-modal" class="cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+      
+    {% else %}
+      <button class="sold-out" disabled>Sold Out</button>
+    {% endif %}
+  </div>
+
+</div>
+<script>
+  let btn = document.getElementById("register-btn");
+  let modal = document.getElementById("booking-modal");
+  let closeBtn = document.getElementById("close-modal");
+  let bookBtn = document.getElementById("book-btn");
+
+  if (btn) {
+    btn.addEventListener("click", (a) => {
+      a.preventDefault();
+      modal.style.display = "flex";
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+
+  if (bookBtn) {
+    bookBtn.addEventListener("click", (a) => {
+      a.preventDefault();
+
+      let name = document.getElementById("book-name").value;
+      let email = document.getElementById("book-email").value;
+
+      let data = { name, email };
+
+      fetch(`/book-event/{{ event.id }}/`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCSRFToken() // uncomment only if you see 403
+        },
+        body: JSON.stringify(data)
+      })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status) {
+          alert("🎉 Thanks for booking! Check your ticket in My Bookings.");
+          modal.style.display = "none";
+          window.location.reload();
+        } else {
+          alert(res.msg || "Booking failed");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Server error");
+      });
+    });
+  }
+
+  function getCSRFToken() {
+    let name = "csrftoken";
+    let cookies = document.cookie.split(";");
+
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.startsWith(name + "=")) {
+        return cookie.substring(name.length + 1);
+      }
+    }
+    return "";
+  }
+</script>
